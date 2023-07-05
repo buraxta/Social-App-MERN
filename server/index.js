@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 
 // Configurations
@@ -44,7 +45,12 @@ const upload = multer({ storage });
 
 // Routes with files
 
+//below we use this route here, because we have to use "upload" function here
+//we only have to use routes that we have to use "upload" function.
 app.post("/auth/register", upload.single("picture"), register);
+
+// Routes
+app.use("/auth", authRoutes);
 
 // Mongoose Setup
 
